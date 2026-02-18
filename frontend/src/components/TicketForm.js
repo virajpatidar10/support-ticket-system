@@ -10,6 +10,7 @@ function TicketForm({ onTicketCreated, apiUrl }) {
   const [isClassifying, setIsClassifying] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleDescriptionBlur = async () => {
     if (formData.description.trim().length > 10) {
@@ -43,6 +44,7 @@ function TicketForm({ onTicketCreated, apiUrl }) {
     e.preventDefault();
     setIsSubmitting(true);
     setSuccessMessage('');
+    setErrorMessage('');
 
     try {
       const response = await fetch(`${apiUrl}/api/tickets/`, {
@@ -63,9 +65,14 @@ function TicketForm({ onTicketCreated, apiUrl }) {
         setSuccessMessage('Ticket created successfully!');
         setTimeout(() => setSuccessMessage(''), 3000);
         onTicketCreated();
+      } else {
+        setErrorMessage('Failed to create ticket. Please try again.');
+        setTimeout(() => setErrorMessage(''), 3000);
       }
     } catch (error) {
       console.error('Error creating ticket:', error);
+      setErrorMessage('Network error. Please check your connection.');
+      setTimeout(() => setErrorMessage(''), 3000);
     } finally {
       setIsSubmitting(false);
     }
@@ -75,6 +82,7 @@ function TicketForm({ onTicketCreated, apiUrl }) {
     <div className="card">
       <h2>Submit a Ticket</h2>
       {successMessage && <div className="success-message">✅ {successMessage}</div>}
+      {errorMessage && <div className="error-message">❌ {errorMessage}</div>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="title">Title *</label>
