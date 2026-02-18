@@ -85,7 +85,12 @@ function TicketForm({ onTicketCreated, apiUrl }) {
       {errorMessage && <div className="error-message">❌ {errorMessage}</div>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="title">Title *</label>
+          <label htmlFor="title">
+            Title * 
+            <span style={{ float: 'right', fontSize: '0.85rem', color: formData.title.length > 180 ? '#f45c43' : '#999' }}>
+              {formData.title.length}/200
+            </span>
+          </label>
           <input
             type="text"
             id="title"
