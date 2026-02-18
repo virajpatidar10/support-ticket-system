@@ -60,13 +60,20 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Support Ticket System</h1>
+        <h1>🎫 Support Ticket System</h1>
+        <p>AI-Powered Ticket Management</p>
       </header>
       
       <div className="container">
         <div className="main-content">
-          <TicketForm onTicketCreated={handleTicketCreated} apiUrl={API_URL} />
-          <Stats stats={stats} />
+          <div>
+            <TicketForm onTicketCreated={handleTicketCreated} apiUrl={API_URL} />
+          </div>
+          <div>
+            <Stats stats={stats} />
+          </div>
+        </div>
+        <div style={{ marginTop: '30px' }}>
           <TicketList 
             tickets={tickets} 
             filters={filters}

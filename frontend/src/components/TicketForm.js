@@ -74,7 +74,7 @@ function TicketForm({ onTicketCreated, apiUrl }) {
   return (
     <div className="card">
       <h2>Submit a Ticket</h2>
-      {successMessage && <div className="success-message">{successMessage}</div>}
+      {successMessage && <div className="success-message">✅ {successMessage}</div>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="title">Title *</label>
@@ -83,6 +83,7 @@ function TicketForm({ onTicketCreated, apiUrl }) {
             id="title"
             maxLength="200"
             required
+            placeholder="Brief description of your issue"
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           />
@@ -91,11 +92,12 @@ function TicketForm({ onTicketCreated, apiUrl }) {
         <div className="form-group">
           <label htmlFor="description">
             Description *
-            {isClassifying && <span className="loading-indicator">Analyzing...</span>}
+            {isClassifying && <span className="loading-indicator">AI is analyzing...</span>}
           </label>
           <textarea
             id="description"
             required
+            placeholder="Describe your issue in detail..."
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             onBlur={handleDescriptionBlur}
@@ -104,7 +106,7 @@ function TicketForm({ onTicketCreated, apiUrl }) {
 
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="category">Category *</label>
+            <label htmlFor="category">Category * {formData.category && '🤖'}</label>
             <select
               id="category"
               required
@@ -112,15 +114,15 @@ function TicketForm({ onTicketCreated, apiUrl }) {
               onChange={(e) => setFormData({ ...formData, category: e.target.value })}
             >
               <option value="">Select category</option>
-              <option value="billing">Billing</option>
-              <option value="technical">Technical</option>
-              <option value="account">Account</option>
-              <option value="general">General</option>
+              <option value="billing">💳 Billing</option>
+              <option value="technical">🔧 Technical</option>
+              <option value="account">👤 Account</option>
+              <option value="general">📋 General</option>
             </select>
           </div>
 
           <div className="form-group">
-            <label htmlFor="priority">Priority *</label>
+            <label htmlFor="priority">Priority * {formData.priority && '🤖'}</label>
             <select
               id="priority"
               required
@@ -128,16 +130,16 @@ function TicketForm({ onTicketCreated, apiUrl }) {
               onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
             >
               <option value="">Select priority</option>
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-              <option value="critical">Critical</option>
+              <option value="low">🟢 Low</option>
+              <option value="medium">🟡 Medium</option>
+              <option value="high">🟠 High</option>
+              <option value="critical">🔴 Critical</option>
             </select>
           </div>
         </div>
 
         <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-          {isSubmitting ? 'Submitting...' : 'Submit Ticket'}
+          {isSubmitting ? '⏳ Submitting...' : '🚀 Submit Ticket'}
         </button>
       </form>
     </div>

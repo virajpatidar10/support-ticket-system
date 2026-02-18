@@ -31,13 +31,13 @@ function TicketList({ tickets, filters, setFilters, onTicketUpdated, apiUrl }) {
 
   return (
     <div className="card">
-      <h2>Tickets</h2>
+      <h2>🎫 All Tickets</h2>
       
       <div className="filters">
         <div className="search-box">
           <input
             type="text"
-            placeholder="Search tickets..."
+            placeholder="🔍 Search tickets..."
             value={filters.search}
             onChange={(e) => setFilters({ ...filters, search: e.target.value })}
           />
@@ -48,10 +48,10 @@ function TicketList({ tickets, filters, setFilters, onTicketUpdated, apiUrl }) {
           onChange={(e) => setFilters({ ...filters, category: e.target.value })}
         >
           <option value="">All Categories</option>
-          <option value="billing">Billing</option>
-          <option value="technical">Technical</option>
-          <option value="account">Account</option>
-          <option value="general">General</option>
+          <option value="billing">💳 Billing</option>
+          <option value="technical">🔧 Technical</option>
+          <option value="account">👤 Account</option>
+          <option value="general">📋 General</option>
         </select>
 
         <select
@@ -59,10 +59,10 @@ function TicketList({ tickets, filters, setFilters, onTicketUpdated, apiUrl }) {
           onChange={(e) => setFilters({ ...filters, priority: e.target.value })}
         >
           <option value="">All Priorities</option>
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-          <option value="critical">Critical</option>
+          <option value="low">🟢 Low</option>
+          <option value="medium">🟡 Medium</option>
+          <option value="high">🟠 High</option>
+          <option value="critical">🔴 Critical</option>
         </select>
 
         <select
@@ -70,10 +70,10 @@ function TicketList({ tickets, filters, setFilters, onTicketUpdated, apiUrl }) {
           onChange={(e) => setFilters({ ...filters, status: e.target.value })}
         >
           <option value="">All Statuses</option>
-          <option value="open">Open</option>
-          <option value="in_progress">In Progress</option>
-          <option value="resolved">Resolved</option>
-          <option value="closed">Closed</option>
+          <option value="open">📂 Open</option>
+          <option value="in_progress">⏳ In Progress</option>
+          <option value="resolved">✅ Resolved</option>
+          <option value="closed">🔒 Closed</option>
         </select>
       </div>
 
@@ -87,11 +87,27 @@ function TicketList({ tickets, filters, setFilters, onTicketUpdated, apiUrl }) {
             </div>
             
             <div className="ticket-meta">
-              <span className="badge badge-category">{ticket.category}</span>
-              <span className={`badge badge-priority-${ticket.priority}`}>
-                {ticket.priority}
+              <span className="badge badge-category">
+                {ticket.category === 'billing' && '💳'} 
+                {ticket.category === 'technical' && '🔧'} 
+                {ticket.category === 'account' && '👤'} 
+                {ticket.category === 'general' && '📋'} 
+                {' '}{ticket.category}
               </span>
-              <span className="badge badge-status">{ticket.status.replace('_', ' ')}</span>
+              <span className={`badge badge-priority-${ticket.priority}`}>
+                {ticket.priority === 'low' && '🟢'} 
+                {ticket.priority === 'medium' && '🟡'} 
+                {ticket.priority === 'high' && '🟠'} 
+                {ticket.priority === 'critical' && '🔴'} 
+                {' '}{ticket.priority}
+              </span>
+              <span className="badge badge-status">
+                {ticket.status === 'open' && '📂'} 
+                {ticket.status === 'in_progress' && '⏳'} 
+                {ticket.status === 'resolved' && '✅'} 
+                {ticket.status === 'closed' && '🔒'} 
+                {' '}{ticket.status.replace('_', ' ')}
+              </span>
             </div>
 
             <p className="ticket-description">
@@ -99,16 +115,16 @@ function TicketList({ tickets, filters, setFilters, onTicketUpdated, apiUrl }) {
             </p>
 
             <div className="ticket-footer">
-              <span>{formatDate(ticket.created_at)}</span>
+              <span>🕒 {formatDate(ticket.created_at)}</span>
               <select
                 className="status-selector"
                 value={ticket.status}
                 onChange={(e) => handleStatusChange(ticket.id, e.target.value)}
               >
-                <option value="open">Open</option>
-                <option value="in_progress">In Progress</option>
-                <option value="resolved">Resolved</option>
-                <option value="closed">Closed</option>
+                <option value="open">📂 Open</option>
+                <option value="in_progress">⏳ In Progress</option>
+                <option value="resolved">✅ Resolved</option>
+                <option value="closed">🔒 Closed</option>
               </select>
             </div>
           </div>
