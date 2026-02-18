@@ -139,7 +139,7 @@ function TicketList({ tickets, filters, setFilters, onTicketUpdated, apiUrl }) {
               </span>
             </div>
 
-            <p className="ticket-description">
+            <p className="ticket-description" title={ticket.description}>
               {truncateText(ticket.description)}
             </p>
 
