@@ -77,8 +77,11 @@ def _classify_openai(prompt, api_key):
             'suggested_category': result.get('category', 'general'),
             'suggested_priority': result.get('priority', 'medium')
         }
+    except json.JSONDecodeError as e:
+        print(f"OpenAI JSON parsing error: {e}")
+        return {'suggested_category': 'general', 'suggested_priority': 'medium'}
     except Exception as e:
-        print(f"OpenAI error: {e}")
+        print(f"OpenAI API error: {e}")
         return {'suggested_category': 'general', 'suggested_priority': 'medium'}
 
 
