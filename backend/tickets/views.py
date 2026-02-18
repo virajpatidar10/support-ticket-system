@@ -11,6 +11,18 @@ from .llm_service import classify_ticket
 
 
 class TicketViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet for managing support tickets.
+    
+    Provides CRUD operations and additional actions:
+    - list: Get all tickets with optional filtering
+    - create: Create a new ticket
+    - retrieve: Get a single ticket
+    - update/partial_update: Update ticket fields
+    - destroy: Delete a ticket
+    - stats: Get aggregated statistics
+    - classify: Classify ticket description using LLM
+    """
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
     
