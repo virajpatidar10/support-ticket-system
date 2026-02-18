@@ -3,6 +3,7 @@ import './App.css';
 import TicketForm from './components/TicketForm';
 import TicketList from './components/TicketList';
 import Stats from './components/Stats';
+import Footer from './components/Footer';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
@@ -83,6 +84,7 @@ function App() {
           />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
