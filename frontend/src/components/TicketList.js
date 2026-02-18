@@ -129,7 +129,12 @@ function TicketList({ tickets, filters, setFilters, onTicketUpdated, apiUrl }) {
         tickets.map(ticket => (
           <div key={ticket.id} className="ticket-item">
             <div className="ticket-header">
-              <h3 className="ticket-title">{ticket.title}</h3>
+              <h3 className="ticket-title">
+                <span style={{ color: '#999', fontSize: '0.8rem', fontWeight: 'normal' }}>
+                  #{ticket.id}
+                </span>
+                {' '}{ticket.title}
+              </h3>
             </div>
             
             <div className="ticket-meta">
