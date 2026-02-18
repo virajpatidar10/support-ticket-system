@@ -23,8 +23,14 @@ Open: **http://localhost:3000**
 - AI automatically suggests category and priority based on description
 - Browse and filter tickets by category, priority, status
 - Search tickets by title and description
-- View aggregated statistics
-- Update ticket status
+- View aggregated statistics with real-time updates
+- Update ticket status with dropdown
+- Character counter for title field
+- Relative time display for timestamps
+- Clear filters button
+- Error handling with user-friendly messages
+- Mobile responsive design
+- Loading states and animations
 - Fully containerized with Docker
 
 ## Tech Stack
