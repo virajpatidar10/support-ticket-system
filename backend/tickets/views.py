@@ -1,5 +1,5 @@
 from rest_framework import viewsets, status
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 from django.db.models import Count, Q, Avg
 from django.db.models.functions import TruncDate
@@ -8,6 +8,16 @@ from datetime import timedelta
 from .models import Ticket
 from .serializers import TicketSerializer, ClassifyRequestSerializer, ClassifyResponseSerializer
 from .llm_service import classify_ticket
+
+
+@api_view(['GET'])
+def health_check(request):
+    """Health check endpoint for monitoring"""
+    return Response({
+        'status': 'healthy',
+        'service': 'support-ticket-system',
+        'timestamp': timezone.now().isoformat()
+    })
 
 
 class TicketViewSet(viewsets.ModelViewSet):
