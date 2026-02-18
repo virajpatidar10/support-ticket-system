@@ -48,7 +48,19 @@ function TicketList({ tickets, filters, setFilters, onTicketUpdated, apiUrl }) {
 
   return (
     <div className="card">
-      <h2>🎫 All Tickets</h2>
+      <h2>
+        🎫 All Tickets 
+        <span style={{ 
+          marginLeft: '10px', 
+          fontSize: '0.9rem', 
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          color: 'white',
+          padding: '4px 12px',
+          borderRadius: '20px'
+        }}>
+          {tickets.length}
+        </span>
+      </h2>
       
       <div className="filters">
         <div className="search-box">
