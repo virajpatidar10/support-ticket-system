@@ -15,6 +15,7 @@ function TicketForm({ onTicketCreated, apiUrl }) {
   const handleDescriptionBlur = async () => {
     if (formData.description.trim().length > 10) {
       setIsClassifying(true);
+      const startTime = Date.now();
       try {
         const response = await fetch(`${apiUrl}/api/tickets/classify/`, {
           method: 'POST',
@@ -26,6 +27,8 @@ function TicketForm({ onTicketCreated, apiUrl }) {
         
         if (response.ok) {
           const data = await response.json();
+          const endTime = Date.now();
+          console.log(`AI classification took ${endTime - startTime}ms`);
           setFormData(prev => ({
             ...prev,
             category: data.suggested_category || prev.category,
