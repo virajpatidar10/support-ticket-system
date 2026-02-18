@@ -34,6 +34,8 @@ class Ticket(models.Model):
     class Meta:
         ordering = ['-created_at']
         db_table = 'tickets'
+        verbose_name = 'Support Ticket'
+        verbose_name_plural = 'Support Tickets'
         
     def __str__(self):
-        return self.title
+        return f"#{self.id} - {self.title} ({self.status})"
