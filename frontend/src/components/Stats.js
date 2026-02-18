@@ -5,7 +5,14 @@ function Stats({ stats }) {
     return (
       <div className="card">
         <h2>📊 Statistics</h2>
-        <p style={{ textAlign: 'center', color: '#999' }}>Loading stats...</p>
+        <div className="stats-grid">
+          {[1, 2, 3].map(i => (
+            <div key={i} className="stat-card" style={{ opacity: 0.5 }}>
+              <h3>...</h3>
+              <p>Loading...</p>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
