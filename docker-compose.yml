@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: ticketdb
+      POSTGRES_USER: ticketuser
+      POSTGRES_PASSWORD: ticketpass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://ticketuser:ticketpass@db:5432/ticketdb
+      LLM_API_KEY: ${LLM_API_KEY:-your-api-key-here}
+      LLM_PROVIDER: ${LLM_PROVIDER:-openai}
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
