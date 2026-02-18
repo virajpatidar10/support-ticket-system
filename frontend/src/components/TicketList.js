@@ -104,6 +104,23 @@ function TicketList({ tickets, filters, setFilters, onTicketUpdated, apiUrl }) {
           <option value="resolved">✅ Resolved</option>
           <option value="closed">🔒 Closed</option>
         </select>
+        
+        {(filters.category || filters.priority || filters.status || filters.search) && (
+          <button 
+            onClick={() => setFilters({ category: '', priority: '', status: '', search: '' })}
+            style={{
+              padding: '10px 20px',
+              background: 'linear-gradient(135deg, #eb3349 0%, #f45c43 100%)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontWeight: '600'
+            }}
+          >
+            🗑️ Clear Filters
+          </button>
+        )}
       </div>
 
       {tickets.length === 0 ? (
